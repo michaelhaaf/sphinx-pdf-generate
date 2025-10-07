@@ -164,8 +164,7 @@ class PdfGeneratePlugin:
         start = timer()
 
         abs_dest_path = Path(self._config["outdir"]).joinpath(f"{pagename}.html")
-        src_path = Path(f"{pagename}.rst") if Path(f"{pagename}.rst") else Path(f"{pagename}.md")
-
+        src_path = Path(f"{pagename}.md")
         self._options.rst_src_path = Path(self._config["srcdir"]).joinpath(src_path)
 
         dest_path = abs_dest_path.parent
@@ -194,7 +193,7 @@ class PdfGeneratePlugin:
             if file_name is None:
                 file_name = str(pagename).split("/")[-1]
                 show(
-                    context=f"You must set the filename metadata in {pagename}.rst so we can use in the PDF document. "
+                    context=f"You must set the filename metadata in {pagename}.md so we can use in the PDF document. "
                     f"The source filename is used as fallback.",
                     error=True,
                 )
