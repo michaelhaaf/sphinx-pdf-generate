@@ -165,7 +165,9 @@ class PdfGeneratePlugin:
 
         abs_dest_path = Path(self._config["outdir"]).joinpath(f"{pagename}.html")
         src_path = Path(f"{pagename}.md")
-        self._options.rst_src_path = Path(self._config["srcdir"]).joinpath(src_path)
+        if Path(self._config["srcdir"]).joinpath(f"{pagename}.rst").exists():
+            src_path = Path(f"{pagename}.rst")
+        self._options.src_path = Path(self._config["srcdir"]).joinpath(src_path)
 
         dest_path = abs_dest_path.parent
         if not dest_path.is_dir():
@@ -180,7 +182,7 @@ class PdfGeneratePlugin:
             # Debugging only the debug target file
             path_filter = URLFilter(self._options, self._config)
             debug_target_file = path_filter(pathname=str(self._options.debug_target))
-            doc_src_path = path_filter(pathname=str(self._options.rst_src_path))
+            doc_src_path = path_filter(pathname=str(self._options.src_path))
             if doc_src_path == debug_target_file:
                 build_pdf_document = True
             else:
@@ -193,7 +195,7 @@ class PdfGeneratePlugin:
             if file_name is None:
                 file_name = str(pagename).split("/")[-1]
                 show(
-                    context=f"You must set the filename metadata in {pagename}.md so we can use in the PDF document. "
+                    context=f"You must set the filename metadata in {pagename} so we can use it in the PDF document. "
                     f"The source filename is used as fallback.",
                     error=True,
                 )

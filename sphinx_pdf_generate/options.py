@@ -102,11 +102,11 @@ class Options:
         return self._template
 
     @property
-    def rst_src_path(self) -> Path:
+    def src_path(self) -> Path:
         return self._src_path
 
-    @rst_src_path.setter
-    def rst_src_path(self, input_path):
+    @src_path.setter
+    def src_path(self, input_path):
         self._src_path = input_path
 
     @property

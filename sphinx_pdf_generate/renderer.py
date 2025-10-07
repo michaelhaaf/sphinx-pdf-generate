@@ -62,7 +62,7 @@ class Renderer:
             # Debug a single PDF build file
             path_filter = URLFilter(self._options, self._config)
             debug_target_file = path_filter(pathname=str(self._options.debug_target))
-            doc_src_path = path_filter(pathname=str(self._options.rst_src_path))
+            doc_src_path = path_filter(pathname=str(self._options.src_path))
 
             if doc_src_path == debug_target_file:
                 debug_folder_path = str(self._options.debug_dir()).replace("\\", "/")
