@@ -35,7 +35,7 @@ class Renderer:
         filename: str,
         pdf_metadata: Optional[Dict] = None,
     ):
-        self.render_doc(content, base_url, pdf_metadata=pdf_metadata).write_pdf(filename)
+        self.render_doc(content, base_url, pdf_metadata=pdf_metadata).write_pdf(filename, presentational_hints=True)
 
     def render_doc(self, content: str, base_url: str, pdf_metadata: Dict = None):
         soup = BeautifulSoup(content, "html5lib")
@@ -73,7 +73,7 @@ class Renderer:
                     pdf_html_dir.mkdir(parents=True, exist_ok=True)
                 with open(pdf_html_file, "w", encoding="UTF-8") as f:
                     f.write(soup.prettify())
-                html = HTML(string=str(soup)).render()
+                html = HTML(string=str(soup)).render(presentational_hints=True)
                 return html
         elif self._options.debug and self._options.debug_target is None:
             # Debug every PDF build file
@@ -86,7 +86,7 @@ class Renderer:
             with open(pdf_html_file, "w", encoding="UTF-8") as f:
                 f.write(soup.prettify())
 
-        html = HTML(string=str(soup)).render()
+        html = HTML(string=str(soup)).render(presentational_hints=True)
         return html
 
     def add_link(self, content: str, file_name: str = None):
