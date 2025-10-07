@@ -164,7 +164,7 @@ class PdfGeneratePlugin:
         start = timer()
 
         abs_dest_path = Path(self._config["outdir"]).joinpath(f"{pagename}.html")
-        src_path = Path(f"{pagename}.rst")
+        src_path = Path(f"{pagename}.rst") if Path(f"{pagename}.rst") else Path(f"{pagename}.md")
 
         self._options.rst_src_path = Path(self._config["srcdir"]).joinpath(src_path)
 
