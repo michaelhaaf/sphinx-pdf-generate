@@ -194,11 +194,6 @@ class PdfGeneratePlugin:
             file_name = pdf_meta.get("filename") or pdf_meta.get("title") or self._options.body_title or None
             if file_name is None:
                 file_name = str(pagename).split("/")[-1]
-                show(
-                    context=f"You must set the filename metadata in {pagename} so we can use it in the PDF document. "
-                    f"The source filename is used as fallback.",
-                    error=True,
-                )
 
             # Generate a secure filename
             file_name = secure_filename(file_name)
